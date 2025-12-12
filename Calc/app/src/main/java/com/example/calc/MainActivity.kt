@@ -29,6 +29,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 
 
 class MainActivity : ComponentActivity() {
@@ -42,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     color = Color.Black,
 
                 content = {
-                    bottons()
+                    navigation()
                 }
                 )
             }
@@ -53,9 +57,8 @@ class MainActivity : ComponentActivity() {
 
 
 
-@Preview(showBackground = true)
 @Composable
-fun bottons() {
+fun mainScreen(navController: NavController) {
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -72,7 +75,7 @@ fun bottons() {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        Button(onClick = { },
+        Button(onClick = {navController.navigate("simpleScreen") },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
@@ -82,7 +85,7 @@ fun bottons() {
         ) {
             Text("Simple")
         }
-        Button(onClick = { },
+        Button(onClick = {navController.navigate("advancedScreen") },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
@@ -92,7 +95,7 @@ fun bottons() {
         ) {
             Text("Advanced")
         }
-        Button(onClick = { },
+        Button(onClick = {navController.navigate("aboutScreen") },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
@@ -113,5 +116,46 @@ fun bottons() {
             Text("Exit")
         }
     }
+}
+
+@Composable
+fun navigation(){
+    val nav = rememberNavController()
+
+    NavHost(
+        navController = nav,
+        startDestination = "mainScreen"
+    ){
+        composable("mainScreen") {
+            mainScreen(navController = nav)
+        }
+
+        composable("simpleScreen") {
+            simpleScreen()
+        }
+
+        composable ("advancedScreen"){
+            advancedScreen()
+        }
+
+        composable("aboutScreen") {
+            aboutScreen()
+        }
+    }
+}
+
+@Composable
+fun simpleScreen(){ //PONER BOTON PARA VOLVER A MAINSCREEN EN LAS 3
+
+}
+
+@Composable
+fun advancedScreen(){
+
+}
+
+@Composable
+fun aboutScreen(){
+
 }
 
