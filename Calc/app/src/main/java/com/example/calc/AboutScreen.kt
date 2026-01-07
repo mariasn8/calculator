@@ -21,7 +21,9 @@ fun AboutScreen(){
                     "Functionalities -> There are 2 calculator options:\n\t\t" +
                     "- A simple calculator: basic operations (+, -, *, /)\n\t\t" +
                     "- A scientific calculator: allows more complex operations like trigonometric" +
-                    " functions or exponentiation", color = Color.White,
+                    " functions or exponentiation.\n\n" +
+                    "If the result is a long number it can be scrolled to the right to see it" +
+                    " completely.", color = Color.White,
             fontSize = 18.sp
         )
     }

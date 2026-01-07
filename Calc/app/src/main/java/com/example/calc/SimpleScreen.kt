@@ -1,12 +1,15 @@
 package com.example.calc
 
 import android.content.res.Configuration
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -40,8 +43,8 @@ fun GridSimple(onAction: (String) -> Unit){
     Column(modifier = Modifier.fillMaxWidth().padding(8.dp),
         verticalArrangement = Arrangement.Bottom) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            Buttons("CE", Modifier.weight(1f), onClick = onAction)
-            Buttons("C", Modifier.weight(2f), onClick = onAction)
+            Buttons("C/CE", Modifier.weight(1f), onClick = onAction)
+            Buttons("AC", Modifier.weight(2f), onClick = onAction)
             Buttons("+\n-", Modifier.weight(1f), onClick = onAction)
         }
 
@@ -83,6 +86,9 @@ fun SimpleScreen() {
     var operator by remember { mutableStateOf<String?>(null) }
     var shouldResetScreen by remember { mutableStateOf(false) }
 
+    var lastClickTime by remember { mutableStateOf(0L) }
+    val doubleClickDelay = 500L // milisegundos
+
     //val configuration = LocalConfiguration.current
     //val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE //horizontal
 
@@ -92,8 +98,11 @@ fun SimpleScreen() {
             text = displayText,
             fontSize = 48.sp,
             color = Color.White,
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            textAlign = TextAlign.End
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+                .horizontalScroll(rememberScrollState()),
+            textAlign = TextAlign.End,
+            maxLines = 1,
+            softWrap = false
         )
 
         GridSimple { action ->
@@ -108,7 +117,7 @@ fun SimpleScreen() {
                     }
                 }
                 // Limpiar pantalla
-                action == "C" -> {
+                action == "AC" -> {
                     displayText = "0"
                     operand1 = null
                     operator = null
@@ -137,16 +146,29 @@ fun SimpleScreen() {
                     shouldResetScreen = true
                 }
 
-                action == "CE" -> {
-                    if (displayText.isNotEmpty() && displayText != "0") {
+                action == "C/CE" -> {
+                    val currentTime = System.currentTimeMillis()
+
+                    if (currentTime - lastClickTime < doubleClickDelay) {
+                        //Doble clic, reseteo total
+                        displayText = "0"
+                        operand1 = null
+                        operator = null
+                        shouldResetScreen = false
+                    } else {
+                        //Borra el 2o operando, pero mantiene la operacion
+                        displayText = "0"
+
+                    /*if (displayText.isNotEmpty() && displayText != "0") {
                         // Elimina el último carácter
                         displayText = displayText.dropLast(1)
 
                         // Si queda vacío o solo un signo negativo, vuelve a "0"
                         if (displayText.isEmpty() || displayText == "-") {
                             displayText = "0"
-                        }
+                        } */
                     }
+                    lastClickTime = currentTime
                 }
 
                 action == "+\n-" ->{
