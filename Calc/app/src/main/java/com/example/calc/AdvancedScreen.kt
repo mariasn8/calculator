@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import kotlin.toString
 import kotlin.math.pow
 import kotlin.math.*
+import android.widget.Toast
 
 @Composable
 fun GridAdvanced(onAction: (String) -> Unit){
@@ -82,6 +83,61 @@ fun GridAdvanced(onAction: (String) -> Unit){
     }
 }
 
+@Composable
+fun GridAdvancedLanscape(onAction: (String) -> Unit){
+    Column(modifier = Modifier.fillMaxWidth().padding(8.dp),
+        verticalArrangement = Arrangement.Bottom) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ButtonsLandscape("C/CE", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("AC", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("%", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("+\n-", Modifier.weight(1f), onClick = onAction)
+        }
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ButtonsLandscape("sin", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("cos", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("tan", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("ln", Modifier.weight(1f), onClick = onAction)
+        }
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ButtonsLandscape("sqrt", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("x^2", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("x^y", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("log", Modifier.weight(1f), onClick = onAction)
+        }
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ButtonsLandscape("7", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("8", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("9", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("/", Modifier.weight(1f), onClick = onAction)
+        }
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ButtonsLandscape("4", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("5", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("6", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("*", Modifier.weight(1f), onClick = onAction)
+        }
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ButtonsLandscape("1", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("2", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("3", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("-", Modifier.weight(1f), onClick = onAction)
+        }
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ButtonsLandscape("0", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape(".", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("=", Modifier.weight(1f), onClick = onAction)
+            ButtonsLandscape("+", Modifier.weight(1f), onClick = onAction)
+        }
+    }
+}
+
 @Composable  //ESTO ES UNA COPIA DE LA BASICA
 fun AdvancedScreen(){
     // Estados para la lógica
@@ -110,19 +166,35 @@ fun AdvancedScreen(){
             when {
                 // Si es un número o punto decimal
                 action.all { it.isDigit() } || action == "." -> {
-                    if (shouldResetScreen || displayText == "0") {
-                        displayText = action
-                        shouldResetScreen = false
+                    if (action == ".") {
+                        // Logica punto
+                        if (shouldResetScreen) {
+                            // Si venimos de un resultado anterior, empezamos con "0."
+                            displayText = "0."
+                            shouldResetScreen = false
+                        } else if (!displayText.contains(".")) {
+                            // Solo añadimos el punto si la pantalla no contiene uno ya
+                            // Esto evita el error de tener "1.2.3"
+                            displayText += "."
+                        }
                     } else {
-                        displayText += action
+                        // Logica numeros
+                        if (shouldResetScreen || displayText == "0") {
+                            displayText = action
+                            shouldResetScreen = false
+                        } else {
+                            displayText += action
+                        }
                     }
                 }
+
                 // Limpiar pantalla
                 action == "AC" -> {
                     displayText = "0"
                     operand1 = null
                     operator = null
                 }
+
                 // Operadores básicos
                 action in listOf("+", "-", "*", "/", "x^y") -> {
                     val currentNumber = displayText.toDoubleOrNull()
@@ -158,16 +230,14 @@ fun AdvancedScreen(){
                         operator = null
                         shouldResetScreen = false
                     } else {
-                        displayText = "0"
-
-                        /*if (displayText.isNotEmpty() && displayText != "0") {
+                        //if (displayText.isNotEmpty() && displayText != "0") {
                             // Elimina el último carácter
                             displayText = displayText.dropLast(1)
 
                             // Si queda vacío o solo un signo negativo, vuelve a "0"
                             if (displayText.isEmpty() || displayText == "-") {
                                 displayText = "0"
-                            } */
+                            }
                     }
                     lastClickTime = currentTime
                 }
