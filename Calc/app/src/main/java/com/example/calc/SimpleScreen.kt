@@ -23,6 +23,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import android.widget.Toast
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun Buttons(
@@ -33,22 +35,7 @@ fun Buttons(
         onClick = {onClick(label)},
         shape = RoundedCornerShape(4.dp),
         colors = ButtonDefaults.buttonColors(containerColor = color),
-        modifier = modifier.padding(4.dp).height(140.dp)
-    ) {
-        Text(text = label, fontSize = 30.sp, color = Color.Black)
-    }
-}
-
-@Composable
-fun ButtonsLandscape(
-    label:String, modifier: Modifier = Modifier, color: Color = Color.LightGray,
-    onClick:(String) -> Unit
-){
-    Button(
-        onClick = {onClick(label)},
-        shape = RoundedCornerShape(4.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = color),
-        modifier = modifier.padding(4.dp).height(70.dp)
+        modifier = modifier.padding(4.dp)
     ) {
         Text(text = label, fontSize = 30.sp, color = Color.Black)
     }
@@ -58,38 +45,38 @@ fun ButtonsLandscape(
 fun GridSimple(onAction: (String) -> Unit){
     Column(modifier = Modifier.fillMaxWidth().padding(12.dp),
         verticalArrangement = Arrangement.Bottom) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Buttons("C/CE", Modifier.weight(1f), onClick = onAction)
-            Buttons("AC", Modifier.weight(2f), onClick = onAction)
-            Buttons("+\n-", Modifier.weight(1f), onClick = onAction)
+        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+            Buttons("C/CE", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("AC", Modifier.weight(2f).fillMaxHeight(), onClick = onAction)
+            Buttons("+\n-", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
         }
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Buttons("7", Modifier.weight(1f), onClick = onAction)
-            Buttons("8", Modifier.weight(1f), onClick = onAction)
-            Buttons("9", Modifier.weight(1f), onClick = onAction)
-            Buttons("/", Modifier.weight(1f), onClick = onAction)
+        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+            Buttons("7", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("8", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("9", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("/", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
         }
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Buttons("4", Modifier.weight(1f), onClick = onAction)
-            Buttons("5", Modifier.weight(1f), onClick = onAction)
-            Buttons("6", Modifier.weight(1f), onClick = onAction)
-            Buttons("*", Modifier.weight(1f), onClick = onAction)
+        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+            Buttons("4", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("5", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("6", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("*", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
         }
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Buttons("1", Modifier.weight(1f), onClick = onAction)
-            Buttons("2", Modifier.weight(1f), onClick = onAction)
-            Buttons("3", Modifier.weight(1f), onClick = onAction)
-            Buttons("-", Modifier.weight(1f), onClick = onAction)
+        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+            Buttons("1", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("2", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("3", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("-", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
         }
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Buttons("0", Modifier.weight(1f), onClick = onAction)
-            Buttons(".", Modifier.weight(1f), onClick = onAction)
-            Buttons("=", Modifier.weight(1f), onClick = onAction)
-            Buttons("+", Modifier.weight(1f), onClick = onAction)
+        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+            Buttons("0", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons(".", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("=", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("+", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
         }
     }
 }
@@ -98,35 +85,35 @@ fun GridSimple(onAction: (String) -> Unit){
 fun GridSimpleLandscape(onAction: (String) -> Unit){
     Column(modifier = Modifier.fillMaxWidth().padding(8.dp),
         verticalArrangement = Arrangement.Bottom) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            ButtonsLandscape("C/CE", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("AC", Modifier.weight(2f), onClick = onAction)
-            ButtonsLandscape("+\n-", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("/", Modifier.weight(1f), onClick = onAction)
+        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+            Buttons("C/CE", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("AC", Modifier.weight(2f).fillMaxHeight(), onClick = onAction)
+            Buttons("+\n-", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("/", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
         }
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            ButtonsLandscape("6", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("7", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("8", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("9", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("*", Modifier.weight(1f), onClick = onAction)
+        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+            Buttons("6", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("7", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("8", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("9", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("*", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
         }
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            ButtonsLandscape("2", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("3", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("4", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("5", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("-", Modifier.weight(1f), onClick = onAction)
+        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+            Buttons("2", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("3", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("4", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("5", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("-", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
         }
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            ButtonsLandscape("0", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("1", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape(".", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("=", Modifier.weight(1f), onClick = onAction)
-            ButtonsLandscape("+", Modifier.weight(1f), onClick = onAction)
+        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+            Buttons("0", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("1", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons(".", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("=", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
+            Buttons("+", Modifier.weight(1f).fillMaxHeight(), onClick = onAction)
         }
 
 
@@ -146,6 +133,8 @@ fun SimpleScreen() {
 
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE //horizontal
+
+    val context = LocalContext.current
 
     Column {
         // Pantalla de visualización
@@ -258,7 +247,11 @@ fun SimpleScreen() {
                                 "+" -> operand1!! + secondOperand
                                 "-" -> operand1!! - secondOperand
                                 "*" -> operand1!! * secondOperand
-                                "/" -> if (secondOperand != 0.0) operand1!! / secondOperand else "Error"
+                                "/" -> if (secondOperand != 0.0) operand1!! / secondOperand
+                                    else
+                                        Toast.makeText(context,
+                                        "Error",
+                                        Toast.LENGTH_SHORT).show()
                                 else -> 0.0
                             }
                             displayText = result.toString()
@@ -369,7 +362,11 @@ fun SimpleScreen() {
                                 "+" -> operand1!! + secondOperand
                                 "-" -> operand1!! - secondOperand
                                 "*" -> operand1!! * secondOperand
-                                "/" -> if (secondOperand != 0.0) operand1!! / secondOperand else "Error"
+                                "/" -> if (secondOperand != 0.0) operand1!! / secondOperand
+                                    else
+                                        Toast.makeText(context,
+                                        "Error",
+                                        Toast.LENGTH_SHORT).show()
                                 else -> 0.0
                             }
                             displayText = result.toString()
