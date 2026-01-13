@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -76,7 +77,7 @@ fun MainScreen(navController: NavController) {
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
             ),
-            modifier = Modifier.width(300.dp),
+            modifier = Modifier.fillMaxWidth(0.6f),
             shape = RoundedCornerShape(4.dp)
         ) {
             Text("Simple", fontSize = 25.sp)
@@ -86,7 +87,7 @@ fun MainScreen(navController: NavController) {
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
             ),
-            modifier = Modifier.width(300.dp),
+            modifier = Modifier.fillMaxWidth(0.6f),
             shape = RoundedCornerShape(4.dp)
         ) {
             Text("Advanced", fontSize = 25.sp)
@@ -96,7 +97,7 @@ fun MainScreen(navController: NavController) {
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
             ),
-            modifier = Modifier.width(300.dp),
+            modifier = Modifier.fillMaxWidth(0.6f),
             shape = RoundedCornerShape(4.dp)
         ) {
             Text("About", fontSize = 25.sp)
@@ -108,7 +109,7 @@ fun MainScreen(navController: NavController) {
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
             ),
-            modifier = Modifier.width(300.dp),
+            modifier = Modifier.fillMaxWidth(0.6f),
             shape = RoundedCornerShape(4.dp)
         ) {
             Text("Exit", fontSize = 25.sp)
