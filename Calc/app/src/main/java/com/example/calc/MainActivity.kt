@@ -66,7 +66,7 @@ fun MainScreen(navController: NavController) {
             text = "Calculator",
             color = Color.White,
             textAlign = TextAlign.Center,
-            fontSize = 32.sp
+            fontSize = 40.sp
         )
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -79,7 +79,7 @@ fun MainScreen(navController: NavController) {
             modifier = Modifier.width(300.dp),
             shape = RoundedCornerShape(4.dp)
         ) {
-            Text("Simple", fontSize = 20.sp)
+            Text("Simple", fontSize = 25.sp)
         }
         Button(onClick = {navController.navigate("advancedScreen") },
             colors = ButtonDefaults.buttonColors(
@@ -89,7 +89,7 @@ fun MainScreen(navController: NavController) {
             modifier = Modifier.width(300.dp),
             shape = RoundedCornerShape(4.dp)
         ) {
-            Text("Advanced", fontSize = 20.sp)
+            Text("Advanced", fontSize = 25.sp)
         }
         Button(onClick = {navController.navigate("aboutScreen") },
             colors = ButtonDefaults.buttonColors(
@@ -99,7 +99,7 @@ fun MainScreen(navController: NavController) {
             modifier = Modifier.width(300.dp),
             shape = RoundedCornerShape(4.dp)
         ) {
-            Text("About", fontSize = 20.sp)
+            Text("About", fontSize = 25.sp)
         }
 
         val context= LocalContext.current
@@ -111,7 +111,7 @@ fun MainScreen(navController: NavController) {
             modifier = Modifier.width(300.dp),
             shape = RoundedCornerShape(4.dp)
         ) {
-            Text("Exit", fontSize = 20.sp)
+            Text("Exit", fontSize = 25.sp)
         }
     }
 }

@@ -17,14 +17,14 @@ fun AboutScreen(){
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = "App name -> Calculator\n Author -> María Sánchez Nieto\n" +
-                    "Functionalities -> There are 2 calculator options:\n\t\t" +
+            text = "App name -> Calculator\n\n Author -> María Sánchez Nieto\n\n" +
+                    "Functionalities -> There are 2 calculator options:\n\n\t\t" +
                     "- A simple calculator: basic operations (+, -, *, /)\n\t\t" +
                     "- A scientific calculator: allows more complex operations like trigonometric" +
-                    " functions or exponentiation.\n\n" +
-                    "If the result is a long number it can be scrolled to the right to see it" +
-                    " completely.", color = Color.White,
-            fontSize = 18.sp
+                    " functions or exponentiation.\n\n",
+            color = Color.White,
+            fontSize = 32.sp,
+            lineHeight = 32.sp
         )
     }
 }
